@@ -3,28 +3,51 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Webtik — Full Demo (Single-file)</title>
+<title>Webtik — Full Demo (Fixed Version)</title>
 <style>
-  :root{ --bg:#f0f2f5; --panel:#ffffff; --muted:#6b7280; --accent:#1877f2; --glass: rgba(255,255,255,0.6); --card-shadow: 0 6px 20px rgba(18,18,18,0.06); --radius:12px; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial; }
+  :root {
+    --bg:#f0f2f5;
+    --panel:#ffffff;
+    --muted:#6b7280;
+    --accent:#1877f2;
+    --card-shadow:0 6px 20px rgba(18,18,18,0.06);
+    --radius:12px;
+    font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+  }
   *{box-sizing:border-box}
   html,body{height:100%;margin:0;background:var(--bg);color:#111}
-  a{color:inherit;text-decoration:none} img{max-width:100%;display:block}
-  .app{max-width:1200px;margin:22px auto;padding:18px;display:grid;grid-template-columns:250px 1fr 320px;gap:18px}
-  header.top{grid-column:1/-1;display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.5));box-shadow:var(--card-shadow);position:sticky;top:14px;z-index:50}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+
+  .app{max-width:1200px;margin:22px auto;padding:18px;
+    display:grid;grid-template-columns:250px 1fr 320px;gap:18px}
+  header.top{
+    grid-column:1/-1;display:flex;align-items:center;gap:12px;
+    padding:10px 14px;border-radius:12px;
+    background:linear-gradient(180deg,rgba(255,255,255,0.6),rgba(255,255,255,0.5));
+    box-shadow:var(--card-shadow);position:sticky;top:14px;z-index:50
+  }
   .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;color:var(--accent)}
-  .mark{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#0d57d7);display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:18px;box-shadow:0 4px 10px rgba(24,119,242,0.2)}
-  .search{flex:1;display:flex;align-items:center;background:#f5f6f8;padding:8px 12px;border-radius:10px;gap:8px;border:1px solid rgba(16,24,40,0.03)}
+  .mark{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#0d57d7);
+    display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:18px;
+    box-shadow:0 4px 10px rgba(24,119,242,0.2)}
+  .search{flex:1;display:flex;align-items:center;background:#f5f6f8;padding:8px 12px;
+    border-radius:10px;gap:8px;border:1px solid rgba(16,24,40,0.03)}
   .search input{border:0;background:transparent;outline:none;flex:1;font-size:14px}
   .header-actions{display:flex;gap:8px;align-items:center;margin-left:8px}
-  .icon-btn{background:transparent;border:0;padding:8px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
-  .left, .right{background:var(--panel);padding:14px;border-radius:var(--radius);box-shadow:var(--card-shadow);height:fit-content}
-  .menu-item{display:flex;gap:10px;align-items:center;padding:8px;border-radius:10px;color:#111;margin-bottom:6px;cursor:pointer}
+  .icon-btn{background:transparent;border:0;padding:8px;border-radius:10px;cursor:pointer;
+    display:inline-flex;align-items:center;justify-content:center}
+  .left,.right{background:var(--panel);padding:14px;border-radius:var(--radius);
+    box-shadow:var(--card-shadow);height:fit-content}
+  .menu-item{display:flex;gap:10px;align-items:center;padding:8px;border-radius:10px;
+    color:#111;margin-bottom:6px;cursor:pointer}
   .menu-item:hover{background:#f5f7fa}
   .profile-mini{display:flex;gap:10px;align-items:center}
-  .avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#e2e8f0,#c7d2fe);display:inline-block}
+  .avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#e2e8f0,#c7d2fe)}
   .main{display:flex;flex-direction:column;gap:14px}
   .composer{background:var(--panel);padding:14px;border-radius:var(--radius);box-shadow:var(--card-shadow)}
-  textarea{width:100%;border:0;outline:none;resize:vertical;min-height:80px;font-size:15px;padding:8px;border-radius:8px;background:#f8fafc}
+  textarea{width:100%;border:0;outline:none;resize:vertical;min-height:80px;font-size:15px;
+    padding:8px;border-radius:8px;background:#f8fafc}
   .row{display:flex;align-items:center;gap:10px;margin-top:10px}
   .btn{background:var(--accent);color:white;border:0;padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:600}
   .btn.ghost{background:transparent;color:var(--muted);border:1px solid rgba(16,24,40,0.04)}
@@ -40,97 +63,65 @@
   .trending{font-weight:700;margin-bottom:8px}
   .trend-item{padding:8px;border-radius:8px;margin-bottom:6px;background:#fbfdff;border:1px solid rgba(16,24,40,0.03)}
   @media (max-width:980px){.app{grid-template-columns:1fr;padding:12px}header.top{position:static}.left,.right{display:none}}
-  .muted{color:var(--muted);font-size:13px}.flex{display:flex;gap:8px;align-items:center}.small{font-size:13px;color:var(--muted)}
-  /* modal */
+  .muted{color:var(--muted);font-size:13px}
+  .small{font-size:13px;color:var(--muted)}
   .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.4);display:none;align-items:center;justify-content:center;z-index:200}
   .modal{background:var(--panel);border-radius:12px;padding:18px;max-width:520px;width:92%;box-shadow:var(--card-shadow)}
-  .field{margin-bottom:10px}
-  input[type=text], input[type=email], input[type=password]{width:100%;padding:8px;border-radius:8px;border:1px solid rgba(16,24,40,0.06)}
-  .small-link{color:var(--accent);cursor:pointer}
-  .top-right-controls{display:flex;gap:8px;align-items:center}
-  .tools{display:flex;gap:8px}
 </style>
 </head>
+
 <body>
   <div class="app" id="appRoot">
-    <header class="top" aria-label="Webtik header">
-      <div class="logo" title="Webtik">
-        <div class="mark">W</div>
-        <div>Webtik</div>
+    <header class="top">
+      <div class="logo"><div class="mark">W</div>Webtik</div>
+      <div class="search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21 21l-4.35-4.35" stroke="#9AA4B2" stroke-width="2" stroke-linecap="round"/></svg>
+        <input id="searchInput" placeholder="Search Webtik (people, posts, topics)">
+        <div class="small muted">Press Enter</div>
       </div>
-
-      <div class="search" role="search">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M21 21l-4.35-4.35" stroke="#9AA4B2" stroke-width="2" stroke-linecap="round"/></svg>
-        <input id="searchInput" placeholder="Search Webtik (people, posts, topics)" />
-        <div class="small muted">Press Enter to search</div>
-      </div>
-
-      <div class="header-actions" style="margin-left:12px">
-        <div class="top-right-controls">
-          <div class="tools">
-            <button class="icon-btn" id="btnExport" title="Export data">⤓ Export</button>
-            <button class="icon-btn" id="btnImport" title="Import data">⤒ Import</button>
-          </div>
-          <button class="icon-btn" id="btnNotifications" title="Notifications">🔔</button>
-          <button class="icon-btn" id="btnMessages" title="Messages">💬</button>
-          <button class="icon-btn" id="btnProfile" title="Profile">👤</button>
-        </div>
+      <div class="header-actions">
+        <button class="icon-btn" id="btnExport" title="Export data">⤓</button>
+        <button class="icon-btn" id="btnImport" title="Import data">⤒</button>
+        <button class="icon-btn" id="btnNotifications">🔔</button>
+        <button class="icon-btn" id="btnMessages">💬</button>
+        <button class="icon-btn" id="btnProfile">👤</button>
       </div>
     </header>
 
-    <aside class="left" aria-label="Left sidebar">
+    <aside class="left">
       <div class="profile-mini">
         <div class="avatar" id="miniAvatar"></div>
-        <div>
-          <div style="font-weight:700" id="miniName">You</div>
-          <div class="small muted" id="miniEmail">you@webtik.demo</div>
-        </div>
+        <div><div id="miniName" style="font-weight:700">You</div>
+        <div id="miniEmail" class="small muted">you@webtik.demo</div></div>
       </div>
 
       <hr style="border:none;height:10px">
-
       <div>
-        <div class="menu-item" data-nav="home"><a href="home.html">🏠 Home</a></div>
-        <div class="menu-item" data-nav="feed"><a href="feed.html">📰 My Feed</a></div>
-        <div class="menu-item" data-nav="friends"><a href="freinds.html">🧑‍🤝‍🧑 Friends</a></div>
-        <div class="menu-item" data-nav="collections"<a href="collection.html">📁 Collections</a></div>
-        <div class="menu-item" data-nav="settings">⚙️ Settings</div>
+        <div class="menu-item"><a href="#">🏠 Home</a></div>
+        <div class="menu-item"><a href="#">📰 My Feed</a></div>
+        <div class="menu-item"><a href="#">🧑‍🤝‍🧑 Friends</a></div>
+        <div class="menu-item"><a href="#">📁 Collections</a></div>
+        <div class="menu-item"><a href="#">⚙️ Settings</a></div>
       </div>
-
-      <hr style="border:none;height:8px">
-
-      <div class="small muted">Shortcuts</div>
-      <div style="margin-top:8px">
-        <div class="menu-item">📣 Pages</div>
-        <div class="menu-item">🎯 Groups</div>
-        <div class="menu-item">🛒 Marketplace</div>
-      </div>
-
-      <hr style="border:none;height:8px">
-      <div style="margin-top:8px">
-        <button class="btn ghost" id="btnOpenAuth">Switch / Create Account</button>
-      </div>
+      <hr style="border:none;height:10px">
+      <button class="btn ghost" id="btnOpenAuth">Switch / Create Account</button>
     </aside>
 
     <main class="main" id="mainColumn">
-      <section class="composer" aria-label="Compose">
+      <section class="composer">
         <div style="display:flex;gap:12px;align-items:flex-start">
           <div class="avatar"></div>
           <div style="flex:1">
             <textarea id="postText" placeholder="What's happening on Webtik?"></textarea>
-
             <div class="row" style="justify-content:space-between">
               <div class="flex">
-                <label class="pill" title="Add image">📷 <input id="imgInput" type="file" accept="image/*" style="display:none"></label>
-                <label class="pill" title="Add feeling">😊</label>
-                <label class="pill" title="Check in">📍</label>
+                <label class="pill">📷 <input id="imgInput" type="file" accept="image/*" style="display:none"></label>
               </div>
               <div>
                 <button class="btn" id="btnPost">Post</button>
                 <button class="btn ghost" id="btnClear">Clear</button>
               </div>
             </div>
-
             <div id="attachmentPreview" class="attachment-preview" style="display:none">
               <img id="attachmentImg" alt="attachment" style="width:100%;height:auto;border-radius:8px">
             </div>
@@ -138,185 +129,153 @@
         </div>
       </section>
 
-      <section id="feedList" aria-label="Feed" style="display:flex;flex-direction:column;gap:12px"></section>
+      <section id="feedList" style="display:flex;flex-direction:column;gap:12px"></section>
     </main>
 
-    <aside class="right" aria-label="Right sidebar">
+    <aside class="right">
       <div style="display:flex;justify-content:space-between;align-items:center">
         <div class="trending">Trending</div>
         <div class="small muted">Now</div>
       </div>
-
       <div id="trends" style="margin-top:10px"></div>
-
       <hr style="border:none;height:10px">
-
       <div class="small muted">Contacts</div>
       <div id="contacts" style="margin-top:10px;display:flex;flex-direction:column;gap:8px"></div>
     </aside>
   </div>
 
-  <!-- Modal: Auth / Switch User -->
+  <!-- Modal -->
   <div class="modal-backdrop" id="modalBackdrop">
-    <div class="modal" role="dialog" aria-modal="true" aria-label="Account">
+    <div class="modal">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
         <div style="font-weight:800">Accounts</div>
-        <div><button class="btn ghost" id="btnCloseModal">Close</button></div>
+        <button class="btn ghost" id="btnCloseModal">Close</button>
       </div>
-
       <div style="display:flex;gap:12px">
         <div style="flex:1">
-          <div style="font-weight:700;margin-bottom:8px">Existing accounts</div>
+          <div style="font-weight:700;margin-bottom:8px">Existing Accounts</div>
           <div id="accountList"></div>
         </div>
         <div style="width:2px;background:#f2f3f5"></div>
         <div style="flex:1">
-          <div style="font-weight:700;margin-bottom:8px">Create account</div>
-          <div class="field"><input id="newName" type="text" placeholder="Full name"></div>
-          <div class="field"><input id="newEmail" type="email" placeholder="Email"></div>
-          <div class="field"><input id="newPass" type="password" placeholder="Password (demo)"></div>
-          <div style="display:flex;gap:8px"><button class="btn" id="btnCreate">Create</button><button class="btn ghost" id="btnDemoLogin">Demo login</button></div>
+          <div style="font-weight:700;margin-bottom:8px">Create Account</div>
+          <input id="newName" type="text" placeholder="Full name" class="field"><br>
+          <input id="newEmail" type="email" placeholder="Email" class="field"><br>
+          <input id="newPass" type="password" placeholder="Password (demo)" class="field"><br>
+          <button class="btn" id="btnCreate">Create</button>
+          <button class="btn ghost" id="btnDemoLogin">Demo Login</button>
         </div>
       </div>
     </div>
   </div>
-  <nav>
-  
-<!-- Your existing Webtik content here -->
-
 
 <script>
 (()=>{
-  // ----- Simple client-side "API" that persists in localStorage -----
-  const LS = 'webtik_full_v1';
-  function load(){ try{ return JSON.parse(localStorage.getItem(LS)||'{}'); }catch(e){ return {}; } }
-  function save(db){ localStorage.setItem(LS, JSON.stringify(db)); }
-  // Initialize DB with sensible defaults
-  let DB = load();
-  if(!DB.users) DB.users = [];
-  if(!DB.posts) DB.posts = [];
-  if(!DB.trends) DB.trends = ['#WebtikLaunch','#CoffeeLovers','#IndiaTech'];
+  const LS='webtik_full_v1';
+  const load=()=>{try{return JSON.parse(localStorage.getItem(LS)||'{}')}catch(e){return{}}};
+  const save=db=>localStorage.setItem(LS,JSON.stringify(db));
 
-  // Create a demo user if none
-  if(DB.users.length === 0){ DB.users.push({id:'u_demo',name:'You (Webtik)',email:'you@webtik.demo',avatarColor:randGradient(),password:'demo'}); save(DB); }
-  // pick current user
-  if(!DB.currentUser) DB.currentUser = DB.users[0].id;
+  let DB=load();
+  if(!DB.users)DB.users=[];
+  if(!DB.posts)DB.posts=[];
+  if(!DB.trends)DB.trends=['#WebtikLaunch','#CoffeeLovers','#IndiaTech'];
+  if(DB.users.length===0){
+    DB.users.push({id:'u_demo',name:'You (Webtik)',email:'you@webtik.demo',avatarColor:randGradient(),password:'demo'});
+    save(DB);
+  }
+  if(!DB.currentUser)DB.currentUser=DB.users[0].id;
+  if(DB.posts.length===0){
+    DB.posts=[
+      {id:genId(),userId:DB.users[0].id,time:Date.now()-3600000,text:'Welcome to Webtik — demo post!',likes:5,likedBy:[],comments:[{from:'Maya',text:'Nice!'}]}
+    ];
+    save(DB);
+  }
 
-  // Some sample posts if empty
-  if(DB.posts.length === 0){ DB.posts = [
-    {id:genId(),userId:DB.users[0].id,time:Date.now()-1000*60*60*3,text:'Welcome to Webtik — this is a demo post!',image:null,likes:5,likedBy:[],comments:[{from:'Maya',text:'Nice!'}]},
-    {id:genId(),userId:genId('u_'),time:Date.now()-1000*60*60*24,text:'Sunset run today — felt great.',image:null,likes:3,likedBy:[],comments:[]}
-  ]; save(DB); }
+  const miniName=document.getElementById('miniName'),
+        miniEmail=document.getElementById('miniEmail'),
+        miniAvatar=document.getElementById('miniAvatar'),
+        feedList=document.getElementById('feedList'),
+        trendsEl=document.getElementById('trends'),
+        contactsEl=document.getElementById('contacts'),
+        postText=document.getElementById('postText'),
+        imgInput=document.getElementById('imgInput'),
+        attachmentPreview=document.getElementById('attachmentPreview'),
+        attachmentImg=document.getElementById('attachmentImg'),
+        btnPost=document.getElementById('btnPost'),
+        btnClear=document.getElementById('btnClear'),
+        searchInput=document.getElementById('searchInput'),
+        modalBackdrop=document.getElementById('modalBackdrop'),
+        btnOpenAuth=document.getElementById('btnOpenAuth'),
+        btnCloseModal=document.getElementById('btnCloseModal'),
+        accountList=document.getElementById('accountList'),
+        btnCreate=document.getElementById('btnCreate'),
+        newName=document.getElementById('newName'),
+        newEmail=document.getElementById('newEmail'),
+        newPass=document.getElementById('newPass'),
+        btnDemoLogin=document.getElementById('btnDemoLogin'),
+        btnExport=document.getElementById('btnExport'),
+        btnImport=document.getElementById('btnImport');
 
-  // DOM refs
-  const miniName = document.getElementById('miniName');
-  const miniEmail = document.getElementById('miniEmail');
-  const miniAvatar = document.getElementById('miniAvatar');
-  const feedList = document.getElementById('feedList');
-  const trendsEl = document.getElementById('trends');
-  const contactsEl = document.getElementById('contacts');
-  const btnPost = document.getElementById('btnPost');
-  const btnClear = document.getElementById('btnClear');
-  const postText = document.getElementById('postText');
-  const imgInput = document.getElementById('imgInput');
-  const attachmentPreview = document.getElementById('attachmentPreview');
-  const attachmentImg = document.getElementById('attachmentImg');
-  const searchInput = document.getElementById('searchInput');
-  const modalBackdrop = document.getElementById('modalBackdrop');
-  const btnOpenAuth = document.getElementById('btnOpenAuth');
-  const btnCloseModal = document.getElementById('btnCloseModal');
-  const accountList = document.getElementById('accountList');
-  const btnCreate = document.getElementById('btnCreate');
-  const newName = document.getElementById('newName');
-  const newEmail = document.getElementById('newEmail');
-  const newPass = document.getElementById('newPass');
-  const btnDemoLogin = document.getElementById('btnDemoLogin');
-  const btnExport = document.getElementById('btnExport');
-  const btnImport = document.getElementById('btnImport');
-
-  // wire up
   renderUser(); renderFeed(); renderTrends(); renderContacts(); renderAccountList();
 
-  btnPost.addEventListener('click', onPost);
-  btnClear.addEventListener('click', clearComposer);
-  imgInput.addEventListener('change', onImageSelected);
-  searchInput.addEventListener('keydown', (e)=>{ if(e.key==='Enter'){ doSearch(searchInput.value.trim()); } });
-  btnOpenAuth.addEventListener('click', ()=>{ modalBackdrop.style.display='flex'; });
-  btnCloseModal.addEventListener('click', ()=>{ modalBackdrop.style.display='none'; });
-  btnCreate.addEventListener('click', createAccount);
-  btnDemoLogin.addEventListener('click', ()=>{ login('u_demo'); modalBackdrop.style.display='none'; });
-  btnExport.addEventListener('click', exportData);
-  btnImport.addEventListener('click', importData);
+  btnPost.onclick=()=>{const text=postText.value.trim();const img=(attachmentImg.src&&attachmentPreview.style.display!=='none')?attachmentImg.src:null;if(!text&&!img){alert('Write something');return;}apiCreatePost({text,image:img});renderFeed();clearComposer();};
+  btnClear.onclick=clearComposer;
+  imgInput.onchange=onImageSelected;
+  searchInput.onkeydown=e=>{if(e.key==='Enter')doSearch(searchInput.value.trim())};
+  btnOpenAuth.onclick=()=>modalBackdrop.style.display='flex';
+  btnCloseModal.onclick=()=>modalBackdrop.style.display='none';
+  btnCreate.onclick=createAccount;
+  btnDemoLogin.onclick=()=>{login('u_demo');modalBackdrop.style.display='none';};
+  btnExport.onclick=exportData;
+  btnImport.onclick=importData;
 
-  // ----- functions simulating backend -----
-  function currentUser(){ return DB.users.find(u=>u.id===DB.currentUser); }
-  function getUserById(id){ return DB.users.find(u=>u.id===id) || {name:'Unknown',avatarColor:randGradient()}; }
-  function createAccount(){ const name=newName.value.trim(), email=newEmail.value.trim().toLowerCase(), pass=newPass.value; if(!name||!email){ alert('Enter name and email'); return; } if(DB.users.find(u=>u.email===email)){ alert('Email already used'); return; } const u={id:genId('u_'),name, email, password:pass||'pass', avatarColor:randGradient()}; DB.users.push(u); DB.currentUser = u.id; save(DB); renderUser(); renderAccountList(); modalBackdrop.style.display='none'; newName.value=''; newEmail.value=''; newPass.value=''; }
-  function login(id){ DB.currentUser = id; save(DB); renderUser(); }
-
-  function apiGetPosts(){ // returns posts sorted by time
-    return DB.posts.slice().sort((a,b)=>b.time-a.time);
+  function currentUser(){return DB.users.find(u=>u.id===DB.currentUser);}
+  function getUserById(id){return DB.users.find(u=>u.id===id)||{name:'Unknown',avatarColor:randGradient()};}
+  function createAccount(){
+    const name=newName.value.trim(),email=newEmail.value.trim().toLowerCase(),pass=newPass.value;
+    if(!name||!email)return alert('Enter name and email');
+    if(DB.users.find(u=>u.email===email))return alert('Email already used');
+    const u={id:genId('u_'),name,email,password:pass||'pass',avatarColor:randGradient()};
+    DB.users.push(u);DB.currentUser=u.id;save(DB);renderUser();renderAccountList();modalBackdrop.style.display='none';
   }
-  function apiCreatePost({text,image}){ const user = currentUser(); const post={id:genId('p_'), userId:user.id, time:Date.now(), text, image, likes:0, likedBy:[], comments:[]}; DB.posts.unshift(post); save(DB); return post; }
-  function apiToggleLike(postId){ const post = DB.posts.find(p=>p.id===postId); if(!post) return; const userId = DB.currentUser; const idx = post.likedBy.indexOf(userId); if(idx>=0){ post.likedBy.splice(idx,1); post.likes=Math.max(0,post.likes-1);} else { post.likedBy.push(userId); post.likes+=1;} save(DB); }
-  function apiAddComment(postId, text){ const post = DB.posts.find(p=>p.id===postId); if(!post) return; post.comments.push({from: getUserById(DB.currentUser).name, text, time:Date.now()}); save(DB); }
-  function apiSharePost(postId){ const p = DB.posts.find(x=>x.id===postId); if(!p) return; const user = currentUser(); const shared = {id: genId('p_'), userId: user.id, time: Date.now(), text: `Shared: "${p.text.slice(0,200)}"`, image: p.image, likes:0, likedBy:[], comments:[]}; DB.posts.unshift(shared); save(DB); }
+  function login(id){DB.currentUser=id;save(DB);renderUser();}
+  function apiGetPosts(){return DB.posts.slice().sort((a,b)=>b.time-a.time);}
+  function apiCreatePost({text,image}){const user=currentUser();const post={id:genId('p_'),userId:user.id,time:Date.now(),text,image,likes:0,likedBy:[],comments:[]};DB.posts.unshift(post);save(DB);}
+  function apiToggleLike(postId){const post=DB.posts.find(p=>p.id===postId);if(!post)return;const userId=DB.currentUser;const i=post.likedBy.indexOf(userId);if(i>=0){post.likedBy.splice(i,1);post.likes--;}else{post.likedBy.push(userId);post.likes++;}save(DB);}
+  function apiAddComment(postId,text){const post=DB.posts.find(p=>p.id===postId);if(!post)return;post.comments.push({from:getUserById(DB.currentUser).name,text,time:Date.now()});save(DB);}
+  function apiSharePost(postId){const p=DB.posts.find(x=>x.id===postId);if(!p)return;const user=currentUser();DB.posts.unshift({id:genId('p_'),userId:user.id,time:Date.now(),text:`Shared: "${p.text}"`,image:p.image,likes:0,likedBy:[],comments:[]});save(DB);}
 
-  // ----- UI actions -----
-  function onPost(){ const text = postText.value.trim(); const img = attachmentImg.src && attachmentPreview.style.display!=='none' ? attachmentImg.src : null; if(!text && !img){ alert('Write something or attach an image.'); return; } apiCreatePost({text,image:img}); renderFeed(); clearComposer(); }
-  function clearComposer(){ postText.value=''; imgInput.value=''; attachmentImg.src=''; attachmentPreview.style.display='none'; }
-  function onImageSelected(e){ const f = e.target.files && e.target.files[0]; if(!f) return; const reader = new FileReader(); reader.onload = ()=>{ attachmentImg.src = reader.result; attachmentPreview.style.display='block'; }; reader.readAsDataURL(f); }
-
-  function renderUser(){ const u = currentUser(); miniName.textContent = u.name; miniEmail.textContent = u.email || '(no email)'; miniAvatar.style.background = u.avatarColor; }
-
-  function renderFeed(filter){ feedList.innerHTML=''; let posts = apiGetPosts(); if(filter) posts = posts.filter(p=> p.text.toLowerCase().includes(filter.toLowerCase())); posts.forEach(post=>{ const el = document.createElement('article'); el.className='post'; const user = getUserById(post.userId); el.innerHTML = `
-      <div class="meta">
-        <div class="avatar" style="width:56px;height:56px;border-radius:12px;background:${user.avatarColor};"></div>
-        <div style="flex:1">
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <div>
-              <div class="name">${escapeHtml(user.name)}</div>
-              <div class="time muted">${timeAgo(post.time)}</div>
-            </div>
-          </div>
-          <div class="body">${escapeHtml(post.text || '')}</div>
-        </div>
-      </div>
-      ${post.image?`<div style="margin-top:10px"><img src="${post.image}" style="border-radius:8px;max-height:420px;object-fit:cover"></div>`:''}
+  function clearComposer(){postText.value='';imgInput.value='';attachmentImg.src='';attachmentPreview.style.display='none';}
+  function onImageSelected(e){const f=e.target.files&&e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{attachmentImg.src=r.result;attachmentPreview.style.display='block';};r.readAsDataURL(f);}
+  function renderUser(){const u=currentUser();miniName.textContent=u.name;miniEmail.textContent=u.email;miniAvatar.style.background=u.avatarColor;}
+  function renderFeed(filter){feedList.innerHTML='';let posts=apiGetPosts();if(filter)posts=posts.filter(p=>p.text.toLowerCase().includes(filter.toLowerCase()));posts.forEach(post=>{const user=getUserById(post.userId);const el=document.createElement('article');el.className='post';el.innerHTML=`
+      <div class="meta"><div class="avatar" style="width:56px;height:56px;border-radius:12px;background:${user.avatarColor}"></div>
+      <div><div class="name">${escapeHtml(user.name)}</div><div class="time">${timeAgo(post.time)}</div></div></div>
+      <div class="body">${escapeHtml(post.text)}</div>
+      ${post.image?`<img src="${post.image}" style="margin-top:8px;border-radius:10px">`:''}
       <div class="actions">
-        <button class="pill like ${post.likedBy.includes(DB.currentUser)?'active':''}" data-id="${post.id}" data-action="like">👍 ${post.likes}</button>
-        <button class="pill comment" data-id="${post.id}" data-action="comment">💬 ${post.comments.length}</button>
-        <button class="pill share" data-id="${post.id}" data-action="share">↪️ Share</button>
-      </div>
-      <div class="small muted" style="margin-top:8px">${post.comments.length?renderCommentsSummary(post.comments):''}</div>
-    `;
-    el.querySelectorAll('button.pill').forEach(btn=>{ btn.addEventListener('click', ()=>{ const action = btn.getAttribute('data-action'); const id = btn.getAttribute('data-id'); if(action==='like'){ apiToggleLike(id); renderFeed(filter);} if(action==='comment'){ const text = prompt('Add a comment:'); if(text) { apiAddComment(id,text); renderFeed(filter);} } if(action==='share'){ apiSharePost(id); renderFeed(filter); alert('Post shared to your feed (demo).'); } }); });
-    feedList.appendChild(el);
-  }); }
+        <button class="pill like ${post.likedBy.includes(DB.currentUser)?'active':''}" data-id="${post.id}">❤️ ${post.likes}</button>
+        <button class="pill comment" data-id="${post.id}">💬 ${post.comments.length}</button>
+        <button class="pill share" data-id="${post.id}">🔁 Share</button>
+      </div>`;
+    feedList.appendChild(el);});
+    document.querySelectorAll('.like').forEach(btn=>btn.onclick=()=>{apiToggleLike(btn.dataset.id);renderFeed(filter);});
+    document.querySelectorAll('.comment').forEach(btn=>btn.onclick=()=>{const t=prompt('Comment:');if(t){apiAddComment(btn.dataset.id,t);renderFeed(filter);}});
+    document.querySelectorAll('.share').forEach(btn=>btn.onclick=()=>{apiSharePost(btn.dataset.id);renderFeed(filter);});
+  }
+  function renderTrends(){trendsEl.innerHTML='';DB.trends.forEach(t=>{const el=document.createElement('div');el.className='trend-item';el.textContent=t;trendsEl.appendChild(el);});}
+  function renderContacts(){contactsEl.innerHTML='';DB.users.forEach(u=>{if(u.id===DB.currentUser)return;const el=document.createElement('div');el.style.display='flex';el.style.alignItems='center';el.style.gap='10px';el.innerHTML=`<div class="avatar" style="width:40px;height:40px;background:${u.avatarColor}"></div><div>${escapeHtml(u.name)}</div>`;contactsEl.appendChild(el);});}
+  function renderAccountList(){accountList.innerHTML='';DB.users.forEach(u=>{const row=document.createElement('div');row.style.display='flex';row.style.alignItems='center';row.style.justifyContent='space-between';row.style.marginBottom='8px';row.innerHTML=`<div style="display:flex;align-items:center;gap:8px"><div class="avatar" style="width:32px;height:32px;background:${u.avatarColor}"></div><div>${escapeHtml(u.name)}</div></div><button class="btn ghost" data-id="${u.id}">Login</button>`;row.querySelector('button').onclick=()=>{login(u.id);modalBackdrop.style.display='none';};accountList.appendChild(row);});}
+  function doSearch(q){if(!q)return renderFeed();renderFeed(q);}
+  function exportData(){const data=JSON.stringify(DB,null,2);const blob=new Blob([data],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='webtik_data.json';a.click();URL.revokeObjectURL(url);}
+  function importData(){const inp=document.createElement('input');inp.type='file';inp.accept='application/json';inp.onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{DB=JSON.parse(r.result);save(DB);renderUser();renderFeed();renderContacts();renderTrends();renderAccountList();alert('Import success');}catch{alert('Invalid file');}};r.readAsText(f);};inp.click();}
 
-  function renderTrends(){ trendsEl.innerHTML=''; DB.trends.forEach(t=>{ const div = document.createElement('div'); div.className='trend-item'; div.innerHTML = `<div style="font-weight:700">${escapeHtml(t)}</div><div class="small muted">Trending • ${Math.floor(Math.random()*1000)+50} posts</div>`; div.addEventListener('click', ()=>{ doSearch(t); }); trendsEl.appendChild(div); }); }
-
-  function renderContacts(){ contactsEl.innerHTML=''; const sample = DB.users.slice(0,8); sample.forEach(c=>{ const d = document.createElement('div'); d.style.display='flex'; d.style.gap='8px'; d.style.alignItems='center'; d.innerHTML = `<div style="width:36px;height:36px;border-radius:10px;background:${c.avatarColor}"></div><div style="flex:1">${c.name}<div class="small muted">online</div></div><button class="pill" data-id="${c.id}">Msg</button>`; d.querySelector('button').addEventListener('click', ()=>{ alert('Demo message to '+c.name); }); contactsEl.appendChild(d); }); }
-
-  function renderAccountList(){ accountList.innerHTML=''; DB.users.forEach(u=>{ const row = document.createElement('div'); row.style.display='flex'; row.style.gap='8px'; row.style.alignItems='center'; row.style.marginBottom='8px'; row.innerHTML = `<div style="width:44px;height:44px;border-radius:10px;background:${u.avatarColor}"></div><div style="flex:1">${escapeHtml(u.name)}<div class="small muted">${escapeHtml(u.email||'')}</div></div><div style="display:flex;gap:6px"><button class="btn" data-id="${u.id}">Use</button>${u.id!=='u_demo'?`<button class="btn" data-id="${u.id}">Use</button>${u.id!=='u_demo'?`<button class="btn ghost" data-del="${u.id}">Delete</button>`:''}</div>`; row.querySelector('button').addEventListener('click', ()=>{ login(u.id); modalBackdrop.style.display='none'; }); const del = row.querySelector('[data-del]'); if(del){ del.addEventListener('click', ()=>{ if(!confirm('Delete account?')) return; DB.users = DB.users.filter(x=>x.id!==u.id); if(DB.currentUser===u.id) DB.currentUser = DB.users[0] ? DB.users[0].id : null; save(DB); renderAccountList(); renderUser(); }); } accountList.appendChild(row); }); }
-
-  function renderCommentsSummary(comments){ if(!comments||comments.length===0) return ''; const first = comments[0]; let txt = `<strong>${escapeHtml(first.from)}</strong>: ${escapeHtml(first.text)}`; if(comments.length>1) txt += ` <span class="muted">(+${comments.length-1} more)</span>`; return txt; }
-
-  function doSearch(q){ if(!q){ renderFeed(); return; } renderFeed(q); }
-
-  function exportData(){ const data = JSON.stringify(DB, null, 2); const blob = new Blob([data], {type:'application/json'}); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = 'webtik-export.json'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url); }
-  function importData(){ const input = document.createElement('input'); input.type='file'; input.accept='application/json'; input.addEventListener('change', (e)=>{ const f = e.target.files[0]; if(!f) return; const reader = new FileReader(); reader.onload = ()=>{ try{ const obj = JSON.parse(reader.result); if(obj.posts && obj.users){ DB = obj; save(DB); renderUser(); renderFeed(); renderTrends(); renderContacts(); renderAccountList(); alert('Imported successfully'); } else alert('Invalid file'); }catch(err){ alert('Failed to parse file'); } }; reader.readAsText(f); }); input.click(); }
-
-  // ----- utilities -----
-  function genId(prefix=''){ return (prefix||'') + Date.now().toString(36) + Math.random().toString(36).slice(2,8); }
-  function timeAgo(ts){ const diff = Date.now()-ts; const sec=Math.floor(diff/1000); if(sec<60) return `${sec}s`; const min=Math.floor(sec/60); if(min<60) return `${min}m`; const hr=Math.floor(min/60); if(hr<24) return `${hr}h`; const days=Math.floor(hr/24); return `${days}d`; }
-  function escapeHtml(s){ if(!s) return ''; return s.replace(/[&<>\"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
-  function randGradient(){ const a=Math.floor(Math.random()*140)+60; const b=Math.floor(Math.random()*140)+60; const c=Math.floor(Math.random()*140)+60; return `linear-gradient(135deg, rgb(${a},${b},${c}), rgb(${(a+20)%255},${(b+70)%255},${(c+30)%255}))`; }
-
-  // Expose for debugging
-  window.WebtikDemo = {DB, saveLocal: ()=>{ save(DB); alert('Saved'); }};
-
+  function escapeHtml(t){return t.replace(/[&<>"']/g,m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m]);}
+  function randGradient(){const c=()=>Math.floor(Math.random()*255);return`linear-gradient(135deg,rgb(${c()},${c()},${c()}),rgb(${c()},${c()},${c()}))`;}
+  function genId(p='id_'){return p+Math.random().toString(36).slice(2,9);}
+  function timeAgo(t){const s=Math.floor((Date.now()-t)/1000);if(s<60)return s+'s ago';const m=Math.floor(s/60);if(m<60)return m+'m ago';const h=Math.floor(m/60);if(h<24)return h+'h ago';const d=Math.floor(h/24);return d+'d ago';}
 })();
 </script>
 </body>
-</html>
+          </html>
+  
